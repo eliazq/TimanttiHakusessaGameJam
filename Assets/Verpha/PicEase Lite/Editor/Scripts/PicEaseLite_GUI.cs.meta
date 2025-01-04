@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 05351102773d4c04d864dacf39a4583f
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences: []
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 302896
+  packageName: PicEase Lite
+  packageVersion: 1.4.0
+  assetPath: Assets/Verpha/PicEase Lite/Editor/Scripts/PicEaseLite_GUI.cs
+  uploadId: 719210

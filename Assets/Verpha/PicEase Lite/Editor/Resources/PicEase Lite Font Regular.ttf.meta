@@ -1,0 +1,28 @@
+fileFormatVersion: 2
+guid: 41ee7cedf4f58d24b8b0c8c1b9f80f54
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontNames:
+  - Laila
+  fallbackFontReferences: []
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 302896
+  packageName: PicEase Lite
+  packageVersion: 1.4.0
+  assetPath: Assets/Verpha/PicEase Lite/Editor/Resources/PicEase Lite Font Regular.ttf
+  uploadId: 719210

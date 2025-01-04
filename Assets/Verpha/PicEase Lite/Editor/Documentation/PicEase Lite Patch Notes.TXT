@@ -1,0 +1,38 @@
+| Version 1.4.0
+(Image Editor)
+• Modified the directory title and default name for exporting edited images.
+
+(Settings)
+• Created a new setting for the Image Editor: Enable Debug Log for Exports.
+• Fixed a bug where the "Image Editor Enable Image Info Display" was not being saved.
+
+(Others)
+• Minor GUI changes.
+• Added a PicEase Full Version section to the About tab.
+
+| Version 1.3.0
+(Image Editor)
+• Tweaked the Temperature, White, and Black adjustments.
+• Tweaked the Cinematic I-II, Cool Blues, High Contrast, Sketch, and Vivid filters.
+
+(Others)
+• Made minor GUI and refactor changes.
+• Performed minor refactors in a few classes.
+• Renamed all scripts.
+• Renamed PicEaseLite_Compute_ImageProcessing.compute to PicEaseLite_Image.compute.
+• Renamed the PicEase Lite Graphics Stars resource file to PicEase Lite Graphics Background.
+
+| Version 1.2.0
+(Image Editor)
+• Tweaked the 'Shadow' adjustment.
+• Tweaked the 'Bleach', 'Cinematic I-II', 'Cool Blues', 'Dark Gothic', 'Sketch' and 'Vivid' filters.
+
+| Version 1.1.0
+(Settings)
+• Added a new file setting for the Image Editor: "Same Export Path."
+
+(Others)
+• Modified the 'PicEase Lite Graphics Title' resource image.
+
+| Version 1.0.0
+• First release of PicEase Lite.

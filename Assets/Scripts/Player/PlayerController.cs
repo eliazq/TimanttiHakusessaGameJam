@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] NavMeshAgent navAgent;
     [SerializeField] private float clickMaxDistance = 100f;
     [SerializeField] private LayerMask movableLayer;
+    [SerializeField] private GameObject flagVisual;
     [SerializeField] private float walkingSpeed = 1.5f;
     [SerializeField] private float runningSpeed = 2.5f;
     public bool IsWalking { get; private set; } = true;
@@ -16,6 +17,8 @@ public class PlayerController : MonoBehaviour
 
     [Header("DEBUG")]
     Vector3 lastClickPoint;
+
+    GameObject lastFlag;
 
     private void Start()
     {
@@ -37,6 +40,7 @@ public class PlayerController : MonoBehaviour
         {
             IsWalking = false;
             IsRunning = false;
+            Destroy(lastFlag);
         }
         else
         {
@@ -54,6 +58,10 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hit, clickMaxDistance, movableLayer))
         {
             lastClickPoint = hit.point;
+            if (lastFlag != null) Destroy(lastFlag);
+            lastFlag = Instantiate(flagVisual, hit.point, Quaternion.identity);
+            float randomAngle = Random.Range(0f, 360f);
+            lastFlag.transform.Rotate(Vector3.up, randomAngle);
             return hit.point;
         }
         return transform.position;
