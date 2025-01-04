@@ -143,6 +143,7 @@ namespace RRS.Converter
         private const string SCENE_NAME = "Object Converter";
 
         [MenuItem(COMPLETE_TAB_TITLE + "Load Converter Scene", priority = 1)]
+        [Obsolete]
         private static void LoadSceneAndSelect()
         {
             string[] guids = AssetDatabase.FindAssets(SCENE_NAME + " t:scene");
@@ -177,6 +178,7 @@ namespace RRS.Converter
         }
 
         [MenuItem(COMPLETE_TAB_TITLE + "Create Converter", priority = 2)]
+        [Obsolete]
         private static void CreateConverterGameObject()
         {
             DestroyConverter();
@@ -188,12 +190,14 @@ namespace RRS.Converter
         }
 
         [MenuItem(COMPLETE_TAB_TITLE + "Destroy Converter", priority = 3)]
+        [Obsolete]
         private static void DestroyConverter()
         {
             var converter = FindObjectOfType<ObjectToIconConverter>();
             DestroyImmediate(converter?.gameObject);
         }
 
+        [Obsolete]
         public void Update()
         {
             if (Camera == null || PreviewCamera == null) { FindOrCreateCameras(); }
@@ -221,6 +225,7 @@ namespace RRS.Converter
             ClearPreviewTexture();
         }
 
+        [Obsolete]
         private void FindOrCreateCaptureTarget()
         {
             CaptureTarget = FindObjectOfType<CaptureTarget>();
@@ -231,6 +236,7 @@ namespace RRS.Converter
             CaptureTarget.transform.parent = transform;
         }
 
+        [Obsolete]
         private void FindOrCreateCameras()
         {
             var converterCam = FindObjectOfType<ConverterCamera>();

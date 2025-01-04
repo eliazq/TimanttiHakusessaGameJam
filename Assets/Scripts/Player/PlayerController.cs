@@ -11,29 +11,44 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private GameObject flagVisual;
     [SerializeField] private float walkingSpeed = 1.5f;
     [SerializeField] private float runningSpeed = 2.5f;
+
+    [Header("Stamina")]
+    [SerializeField] private float maxStamina = 100f; // Maximum stamina
+    [SerializeField] private float staminaDrainRate = 1.5f; // Stamina drain rate per second
+    [SerializeField] private float staminaRegenRate = 1f; // Stamina regen rate per interval
+    [SerializeField] private float regenInterval = 4f; // Interval for stamina regeneration
+    
+    public float stamina { get { return currentStamina; } private set { currentStamina = value; } }
+    private float currentStamina;
+    private float regenTimer;
+
     public bool IsWalking { get; private set; } = true;
     public bool IsRunning { get; private set; }
     public bool IsMoving { get { return !IsWalking && !IsRunning; } }
-
-    [Header("DEBUG")]
-    Vector3 lastClickPoint;
 
     GameObject lastFlag;
 
     private void Start()
     {
         navAgent.speed = walkingSpeed;
+        stamina = maxStamina; // Initialize stamina
+        regenTimer = 0f; // Initialize regeneration timer
     }
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+        HandleMovementInput();
+        HandleStamina();
+        HandleMovementSpeed();
+    }
+
+    private void HandleMovementSpeed()
+    {
+        if (stamina <= 0)
         {
-            Vector3 mouseClickInWorld = GetMouseClickPointInWorld();
-            if (mouseClickInWorld != transform.position)
-            {
-                navAgent.destination = mouseClickInWorld;
-            }
+            navAgent.speed = walkingSpeed;
+            IsRunning = false;
+            IsWalking = true;
         }
         float stoppingThreshold = 0.1f;
         if (Vector3.Distance(transform.position, navAgent.destination) < stoppingThreshold)
@@ -51,13 +66,29 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+    private void HandleMovementInput()
+    {
+        if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
+        {
+            MoveToMousePosition();
+        }
+    }
+
+    private void MoveToMousePosition()
+    {
+        Vector3 mouseClickInWorld = GetMouseClickPointInWorld();
+        if (mouseClickInWorld != transform.position)
+        {
+            navAgent.destination = mouseClickInWorld;
+        }
+    }
+
     private Vector3 GetMouseClickPointInWorld()
     {
         Ray ray = mainCamera.ScreenPointToRay(Input.mousePosition);
 
         if (Physics.Raycast(ray, out RaycastHit hit, clickMaxDistance, movableLayer))
         {
-            lastClickPoint = hit.point;
             if (lastFlag != null) Destroy(lastFlag);
             lastFlag = Instantiate(flagVisual, hit.point, Quaternion.identity);
             float randomAngle = Random.Range(0f, 360f);
@@ -69,7 +100,7 @@ public class PlayerController : MonoBehaviour
 
     public void TriggerRunning()
     {
-        if (!IsRunning)
+        if (!IsRunning && stamina > 0)
         {
             navAgent.speed = runningSpeed;
         }
@@ -79,9 +110,26 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmos()
+    private void HandleStamina()
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawSphere(lastClickPoint, 0.5f);
+        if (IsRunning && stamina > 0)
+        {
+            // Drain stamina while running
+            stamina -= staminaDrainRate * Time.deltaTime;
+        }
+        else if (!IsRunning)
+        {
+            // Regenerate stamina if not running
+            regenTimer += Time.deltaTime;
+            if (regenTimer >= regenInterval)
+            {
+                stamina = Mathf.Min(stamina + staminaRegenRate, maxStamina);
+                regenTimer = 0f; // Reset the regeneration timer
+            }
+        }
+
+        // Clamp stamina between 0 and maxStamina
+        stamina = Mathf.Clamp(stamina, 0, maxStamina);
     }
+
 }

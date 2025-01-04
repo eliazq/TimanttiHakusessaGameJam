@@ -1031,6 +1031,10 @@ MonoBehaviour:
   flagVisual: {fileID: 4914375707539917377, guid: 8481da5debdee2b48bde906e63db4146, type: 3}
   walkingSpeed: 2.5
   runningSpeed: 3.4
+  maxStamina: 10
+  staminaDrainRate: 0.85
+  staminaRegenRate: 1
+  regenInterval: 6
 --- !u!195 &898863702
 NavMeshAgent:
   m_ObjectHideFlags: 0
