@@ -18,7 +18,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float staminaRegenRate = 1f; // Stamina regen rate per interval
     [SerializeField] private float regenInterval = 4f; // Interval for stamina regeneration
     
-    public float stamina { get { return currentStamina; } private set { currentStamina = value; } }
+    public float Stamina { get { return currentStamina; } private set { currentStamina = value; } }
     private float currentStamina;
     private float regenTimer;
 
@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     private void Start()
     {
         navAgent.speed = walkingSpeed;
-        stamina = maxStamina; // Initialize stamina
+        Stamina = maxStamina; // Initialize stamina
         regenTimer = 0f; // Initialize regeneration timer
     }
 
@@ -44,7 +44,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMovementSpeed()
     {
-        if (stamina <= 0)
+        if (Stamina <= 0)
         {
             navAgent.speed = walkingSpeed;
             IsRunning = false;
@@ -100,7 +100,7 @@ public class PlayerController : MonoBehaviour
 
     public void TriggerRunning()
     {
-        if (!IsRunning && stamina > 0)
+        if (!IsRunning && Stamina > 0)
         {
             navAgent.speed = runningSpeed;
         }
@@ -112,10 +112,10 @@ public class PlayerController : MonoBehaviour
 
     private void HandleStamina()
     {
-        if (IsRunning && stamina > 0)
+        if (IsRunning && Stamina > 0)
         {
             // Drain stamina while running
-            stamina -= staminaDrainRate * Time.deltaTime;
+            Stamina -= staminaDrainRate * Time.deltaTime;
         }
         else if (!IsRunning)
         {
@@ -123,13 +123,13 @@ public class PlayerController : MonoBehaviour
             regenTimer += Time.deltaTime;
             if (regenTimer >= regenInterval)
             {
-                stamina = Mathf.Min(stamina + staminaRegenRate, maxStamina);
+                Stamina = Mathf.Min(Stamina + staminaRegenRate, maxStamina);
                 regenTimer = 0f; // Reset the regeneration timer
             }
         }
 
         // Clamp stamina between 0 and maxStamina
-        stamina = Mathf.Clamp(stamina, 0, maxStamina);
+        Stamina = Mathf.Clamp(Stamina, 0, maxStamina);
     }
 
 }
