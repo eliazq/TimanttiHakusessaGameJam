@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class MinerMerchant : MonoBehaviour, IInteractable
 {
     [SerializeField] int rockCost = 750;
-    [SerializeField] string interactText = string.Empty;
     [SerializeField] GameObject minerSellingUI;
     [SerializeField] Transform rockButtonsContainer;
     [SerializeField] GameObject rockButton;
@@ -95,7 +94,9 @@ public class MinerMerchant : MonoBehaviour, IInteractable
 
     public string GetInteractText()
     {
-        return interactText;
+        if (minerSellingUI.activeSelf)
+            return "Close Seller's Menu";
+        else return "Open Seller's Menu";
     }
 
     public Transform GetTransform()
@@ -105,6 +106,16 @@ public class MinerMerchant : MonoBehaviour, IInteractable
 
     public void Interact(Transform interactorTransform)
     {
+        if (minerSellingUI.activeSelf)
+        {
+            Player.Instance.controller.InputsActive = true;
+            Player.Instance.controller.MovementActive = true;
+        }
+        else
+        {
+            Player.Instance.controller.InputsActive = false;
+            Player.Instance.controller.MovementActive = false;
+        }
         TriggerSellerUI();
     }
 

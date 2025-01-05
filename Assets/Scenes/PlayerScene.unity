@@ -806,6 +806,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1393935793147489840, guid: c628a30c88afadb41aa3ba73b7aed83d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6074959922942901114, guid: c628a30c88afadb41aa3ba73b7aed83d, type: 3}
       propertyPath: m_Name
       value: MinerMerchant (2)
@@ -1557,6 +1561,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1393935793147489840, guid: c628a30c88afadb41aa3ba73b7aed83d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6074959922942901114, guid: c628a30c88afadb41aa3ba73b7aed83d, type: 3}
       propertyPath: m_Name
       value: MinerMerchant (1)
@@ -2133,6 +2141,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 660585765203427367, guid: c628a30c88afadb41aa3ba73b7aed83d, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1393935793147489840, guid: c628a30c88afadb41aa3ba73b7aed83d, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6074959922942901114, guid: c628a30c88afadb41aa3ba73b7aed83d, type: 3}

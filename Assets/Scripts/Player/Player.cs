@@ -10,7 +10,7 @@ public class Player : MonoBehaviour
 
     [SerializeField] private Inventory inventory;
 
-    PlayerController controller;
+    public PlayerController controller;
     public Inventory Inventory { get { return inventory; } }
 
     public bool IsMining { get { return isMining; } }
@@ -42,7 +42,7 @@ public class Player : MonoBehaviour
 
     private void AddRocksToInventoryAfterTime()
     {
-
+        // TODO, ROCK ITEM, rock is only sellable, do interface, in script when sell check if item is ISellable
     }
 
     public void StartMiningRock(RockMine targetRockMine)
