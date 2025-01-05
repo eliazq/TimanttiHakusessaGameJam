@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data: {fileID: 11400000, guid: a88ea979c4f56424ea5f645c77d61b84, type: 2}
   interactText: Pick Up Emerald
-  cost: 5130000
+  cost: 6500
 --- !u!65 &357474924934491059
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data: {fileID: 11400000, guid: f0e09421a59d6c54aa89c5381e8cbe88, type: 2}
   interactText: Pick Up Ruby
-  cost: 10356000
+  cost: 3000
 --- !u!65 &7081245407461400596
 BoxCollider:
   m_ObjectHideFlags: 0

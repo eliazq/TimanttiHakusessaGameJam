@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data: {fileID: 11400000, guid: e238b91ff7f8b004aa4ab7ec02a7a5b9, type: 2}
   interactText: Pick Up Sapphire
-  cost: 4000000
+  cost: 1350
 --- !u!65 &3176212424684849527
 BoxCollider:
   m_ObjectHideFlags: 0

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 706ee04b24176aa418f453086462da3f, type: 3}
   m_Name: RubyData
   m_EditorClassIdentifier: 
-  itemIcon: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  stackable: 0
+  itemIcon: {fileID: 21300000, guid: f2638538cbf5f9443841230150501da4, type: 3}
+  stackable: 1
   itemName: Ruby

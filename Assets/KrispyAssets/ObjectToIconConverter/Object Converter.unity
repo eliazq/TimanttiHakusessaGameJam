@@ -149,7 +149,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CaptureTarget: {fileID: 601803320}
-  TextureName: Coin_Visual
+  TextureName: 
   FileType: 0
   TextureType: 0
   TextureCompression: 1
@@ -169,7 +169,7 @@ MonoBehaviour:
   AutoCenterInBounds: 0
   CenterIncludesChildrenBounds: 1
   CenteringType: 1
-  CenteringDepthBufferMultiplier: 0.041
+  CenteringDepthBufferMultiplier: 0.04
   AutoOrientate: 0
   AutoOrientationSetting:
     Direction: 0
@@ -183,11 +183,11 @@ MonoBehaviour:
   GizmoFrontToEndDepth: 2
   DefaultFOV: 60
   SelectedSavePath: E:/ProgramFiles/Unity/Projects/Development/TimanttiHakusessaGameJam/Assets/Art/Sprites/Items
-  PreviewRenderTexture: {fileID: 2036223062}
+  PreviewRenderTexture: {fileID: 2017630698}
   Camera: {fileID: 1587057368}
   PreviewCamera: {fileID: 553433994}
-  CurrentChild: {fileID: 871998335}
-  LastChild: {fileID: 871998335}
+  CurrentChild: {fileID: 0}
+  LastChild: {fileID: 0}
 --- !u!4 &55859790
 Transform:
   m_ObjectHideFlags: 0
@@ -384,7 +384,7 @@ Camera:
     serializedVersion: 2
     m_Bits: 4294967295
   m_RenderingPath: -1
-  m_TargetTexture: {fileID: 2036223062}
+  m_TargetTexture: {fileID: 2017630698}
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
@@ -447,75 +447,12 @@ Transform:
   m_GameObject: {fileID: 601803319}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.123}
+  m_LocalPosition: {x: 0, y: 0, z: 0.12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children:
-  - {fileID: 871998335}
+  m_Children: []
   m_Father: {fileID: 55859790}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &871998334
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 601803321}
-    m_Modifications:
-    - target: {fileID: 4959855722896133755, guid: 3175aabc2cd0ab748a7a5fa0075b20f8, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4959855722896133755, guid: 3175aabc2cd0ab748a7a5fa0075b20f8, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.0099
-      objectReference: {fileID: 0}
-    - target: {fileID: 4959855722896133755, guid: 3175aabc2cd0ab748a7a5fa0075b20f8, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4959855722896133755, guid: 3175aabc2cd0ab748a7a5fa0075b20f8, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: -0.35514006
-      objectReference: {fileID: 0}
-    - target: {fileID: 4959855722896133755, guid: 3175aabc2cd0ab748a7a5fa0075b20f8, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.06017623
-      objectReference: {fileID: 0}
-    - target: {fileID: 4959855722896133755, guid: 3175aabc2cd0ab748a7a5fa0075b20f8, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0.8877156
-      objectReference: {fileID: 0}
-    - target: {fileID: 4959855722896133755, guid: 3175aabc2cd0ab748a7a5fa0075b20f8, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0.28673238
-      objectReference: {fileID: 0}
-    - target: {fileID: 4959855722896133755, guid: 3175aabc2cd0ab748a7a5fa0075b20f8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 27.796
-      objectReference: {fileID: 0}
-    - target: {fileID: 4959855722896133755, guid: 3175aabc2cd0ab748a7a5fa0075b20f8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 491.255
-      objectReference: {fileID: 0}
-    - target: {fileID: 4959855722896133755, guid: 3175aabc2cd0ab748a7a5fa0075b20f8, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: -20.549
-      objectReference: {fileID: 0}
-    - target: {fileID: 5737342026942895297, guid: 3175aabc2cd0ab748a7a5fa0075b20f8, type: 3}
-      propertyPath: m_Name
-      value: Coin_Visual
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 3175aabc2cd0ab748a7a5fa0075b20f8, type: 3}
---- !u!4 &871998335 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4959855722896133755, guid: 3175aabc2cd0ab748a7a5fa0075b20f8, type: 3}
-  m_PrefabInstance: {fileID: 871998334}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1587057365
 GameObject:
   m_ObjectHideFlags: 0
@@ -658,7 +595,7 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!84 &2036223062
+--- !u!84 &2017630698
 RenderTexture:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

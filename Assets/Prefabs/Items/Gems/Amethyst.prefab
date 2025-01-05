@@ -48,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Data: {fileID: 11400000, guid: cd270ff28ef69d248ac08b2ed22a765a, type: 2}
   interactText: Pick Up Amethyst
-  cost: 5000
+  cost: 300
 --- !u!65 &3123651601909093115
 BoxCollider:
   m_ObjectHideFlags: 0

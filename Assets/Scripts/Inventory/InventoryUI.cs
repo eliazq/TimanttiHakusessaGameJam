@@ -12,7 +12,7 @@ public class InventoryUI : MonoBehaviour
     private List<ItemSlot> itemSlots = new List<ItemSlot>();
     public bool isVisible { get { return inventoryUI.activeSelf; } }
 
-    private void Start()
+    private void Awake()
     {
         inventory = GetComponent<Inventory>();
         for (int i = 0; i < itemSlotParent.transform.childCount; i++)
@@ -25,6 +25,13 @@ public class InventoryUI : MonoBehaviour
         emptyInventoryIcon = itemSlots[0].itemSprite;
 
         ItemSlot.OnAnyItemSlotSelected += ItemSlot_OnAnyItemSlotSelected;
+
+        Item.OnAnyItemAmountChanged += Item_OnAnyItemAmountChanged;
+    }
+
+    private void Item_OnAnyItemAmountChanged(object sender, EventArgs e)
+    {
+        UpdateInventoryUI();
     }
 
     private void Update()
@@ -53,6 +60,7 @@ public class InventoryUI : MonoBehaviour
     private void OnDestroy()
     {
         ItemSlot.OnAnyItemSlotSelected -= ItemSlot_OnAnyItemSlotSelected;
+        Item.OnAnyItemAmountChanged -= Item_OnAnyItemAmountChanged;
     }
 
     private void InventoryUI_OnInventoryChanged(object sender, System.EventArgs e)
