@@ -22,6 +22,9 @@ public class PlayerController : MonoBehaviour
     private float currentStamina;
     private float regenTimer;
 
+    public bool InputsActive { get; set; } = true;
+    public bool MovementActive { get; set; } = true;
+
     public bool IsWalking { get; private set; } = true;
     public bool IsRunning { get; private set; }
     public bool IsMoving { get { return !IsWalking && !IsRunning; } }
@@ -44,6 +47,14 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMovementSpeed()
     {
+        if (!MovementActive)
+        {
+            navAgent.speed = walkingSpeed;
+            IsWalking = false;
+            IsRunning = false;
+            navAgent.destination = transform.position;
+            return;
+        }
         if (Stamina <= 0)
         {
             navAgent.speed = walkingSpeed;
@@ -68,6 +79,7 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMovementInput()
     {
+        if (!InputsActive) return;
         if (Input.GetMouseButtonDown(0) && !EventSystem.current.IsPointerOverGameObject())
         {
             MoveToMousePosition();

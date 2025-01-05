@@ -12,6 +12,7 @@ public class MinerMerchant : MonoBehaviour, IInteractable
     [SerializeField] GameObject rockButton;
     [SerializeField] TextMeshProUGUI rockPriceText;
     [SerializeField] GameObject diamondPrefab;
+    [SerializeField] GameObject soldOutText;
 
     public bool isDiamondHolder = false;
 
@@ -22,7 +23,7 @@ public class MinerMerchant : MonoBehaviour, IInteractable
 
     private void Awake()
     {
-        rocks = Random.Range(0, maxRocks);
+        rocks = Random.Range(0, maxRocks + 1);
 
         for (int i = 0; i < rocks; i++)
         {
@@ -34,21 +35,24 @@ public class MinerMerchant : MonoBehaviour, IInteractable
                 Destroy(newRockButton);
             });
         }
-
         rockPriceText.text = $"= {rockCost}$";
     }
 
     private void Start()
     {
-        if (rocks <= 0 && isDiamondHolder) rocks = 1;
-
-        GameObject newRockButton = Instantiate(rockButton, rockButtonsContainer);
-        newRockButton.GetComponent<Button>().onClick.AddListener(() =>
+        if (rocks <= 0 && isDiamondHolder)
         {
-            if (rockButtonsContainer.GetComponent<GridLayoutGroup>().enabled) rockButtonsContainer.GetComponent<GridLayoutGroup>().enabled = false;
-            SellRock();
-            Destroy(newRockButton);
-        });
+            rocks = 1;
+            GameObject newRockButton = Instantiate(rockButton, rockButtonsContainer);
+            newRockButton.GetComponent<Button>().onClick.AddListener(() =>
+            {
+                if (rockButtonsContainer.GetComponent<GridLayoutGroup>().enabled) rockButtonsContainer.GetComponent<GridLayoutGroup>().enabled = false;
+                SellRock();
+                Destroy(newRockButton);
+            });
+        }
+        
+        if (rocks <= 0) soldOutText.SetActive(true);
 
     }
 
@@ -65,21 +69,28 @@ public class MinerMerchant : MonoBehaviour, IInteractable
         if (rocks <= 1 && isDiamondHolder && !Player.Instance.Inventory.HasItem("Cullinan Diamond"))
         {
             Player.Instance.Inventory.AddItem(Instantiate(diamondPrefab, null).GetComponent<Item>());
-            return;
         }
-        else if(isDiamondHolder && !Player.Instance.Inventory.HasItem("Cullinan Diamond"))
+        else if (isDiamondHolder && !Player.Instance.Inventory.HasItem("Cullinan Diamond"))
         {
             int rndTwo = Random.Range(0, 3); // 0, 1, 2
             if (rndTwo == 1)
             {
                 Player.Instance.Inventory.AddItem(Instantiate(diamondPrefab, null).GetComponent<Item>());
-                return;
+            }
+            else
+            {
+                GameObject randomGem = Instantiate(RandomObjectSelector.Instance.GetRandomObjectFromWeightList(gems));
+                Player.Instance.Inventory.AddItem(randomGem.GetComponent<Item>());
             }
         }
-
-        GameObject randomGem = Instantiate(RandomObjectSelector.Instance.GetRandomObjectFromWeightList(gems));
-        Player.Instance.Inventory.AddItem(randomGem.GetComponent<Item>());
-
+        else
+        {
+            GameObject randomGem = Instantiate(RandomObjectSelector.Instance.GetRandomObjectFromWeightList(gems));
+            Player.Instance.Inventory.AddItem(randomGem.GetComponent<Item>());
+        }
+        rocks--;
+        
+        if (rocks <= 0) soldOutText.SetActive(true);
     }
 
     public string GetInteractText()
