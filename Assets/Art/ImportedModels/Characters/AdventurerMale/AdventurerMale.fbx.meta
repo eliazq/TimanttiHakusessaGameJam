@@ -640,7 +640,7 @@ ModelImporter:
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
     - serializedVersion: 16
-      name: CharacterArmature|Sword_Slash
+      name: CharacterArmature|Pickaxe_Slash
       takeName: CharacterArmature|Sword_Slash
       internalID: 1844899424984560047
       firstFrame: 0
@@ -651,7 +651,7 @@ ModelImporter:
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 0
+      loopTime: 1
       loopBlend: 0
       loopBlendOrientation: 0
       loopBlendPositionY: 0

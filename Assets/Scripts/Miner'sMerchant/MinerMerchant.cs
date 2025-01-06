@@ -12,6 +12,7 @@ public class MinerMerchant : MonoBehaviour, IInteractable
     [SerializeField] TextMeshProUGUI rockPriceText;
     [SerializeField] GameObject diamondPrefab;
     [SerializeField] GameObject soldOutText;
+    [SerializeField] GameObject coinPrefab;
 
     public bool isDiamondHolder = false;
     
@@ -31,8 +32,8 @@ public class MinerMerchant : MonoBehaviour, IInteractable
             newRockButton.GetComponent<Button>().onClick.AddListener(() =>
             {
                 if (rockButtonsContainer.GetComponent<GridLayoutGroup>().enabled) rockButtonsContainer.GetComponent<GridLayoutGroup>().enabled = false;
-                SellRock();
-                Destroy(newRockButton);
+                if (TrySellRock())
+                    Destroy(newRockButton);
             });
         }
         rockPriceText.text = $"= {rockCost}$";
@@ -51,8 +52,8 @@ public class MinerMerchant : MonoBehaviour, IInteractable
             newRockButton.GetComponent<Button>().onClick.AddListener(() =>
             {
                 if (rockButtonsContainer.GetComponent<GridLayoutGroup>().enabled) rockButtonsContainer.GetComponent<GridLayoutGroup>().enabled = false;
-                SellRock();
-                Destroy(newRockButton);
+                if (TrySellRock())
+                    Destroy(newRockButton);
             });
         }
         
@@ -61,12 +62,12 @@ public class MinerMerchant : MonoBehaviour, IInteractable
         
     }
 
-    private void SellRock()
+    private bool TrySellRock()
     {
         Player.Instance.Inventory.TryGetItem("Coin", out Item coin);
 
         if (coin != null && coin.Amount >= rockCost) coin.Amount -= rockCost;
-        else return;
+        else return false;
 
         if (coin.Amount <= 0) Player.Instance.Inventory.DestroyItem(coin);
 
@@ -96,6 +97,24 @@ public class MinerMerchant : MonoBehaviour, IInteractable
         rocks--;
         
         if (rocks <= 0) soldOutText.SetActive(true);
+        return true;
+    }
+
+    public void BuyRock()
+    {
+        if (Player.Instance.Inventory.TryGetItem("Rock", out Item rock))
+        {
+            if (Player.Instance.Inventory.TryGetItem("Coin", out Item coin))
+            {
+                coin.Amount += rock.GetComponent<Rock>().Price;
+            }
+            else
+            {
+                GameObject coinObj = Instantiate(coinPrefab);
+                coinObj.GetComponent<Coin>().Amount = rock.GetComponent<Rock>().Price;
+            }
+            Player.Instance.Inventory.DestroyItem(rock);
+        }
     }
 
     public string GetInteractText()

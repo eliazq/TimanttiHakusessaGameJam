@@ -8,7 +8,7 @@ public class RockMine : MonoBehaviour, IInteractable
             return "Stop Mining";
         else
             return "Start Mining";
-    }
+    } 
 
     public Transform GetTransform()
     {

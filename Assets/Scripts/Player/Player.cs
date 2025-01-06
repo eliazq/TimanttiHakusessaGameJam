@@ -6,14 +6,20 @@ public class Player : MonoBehaviour
 
     [SerializeField] GameObject coinPrefab;
 
-    [SerializeField] int startMoney = 5500;
+    [SerializeField] int startMoney = 2400;
 
     [SerializeField] private Inventory inventory;
+
+    [SerializeField] GameObject pickaxeVisual;
 
     public PlayerController controller;
     public Inventory Inventory { get { return inventory; } }
 
     public bool IsMining { get { return isMining; } }
+
+    float timer = 0;
+    [SerializeField] float rockGatherInterval = 2;
+    [SerializeField] GameObject rockPrefab;
 
     bool isMining;
 
@@ -26,6 +32,8 @@ public class Player : MonoBehaviour
     private void Start()
     {
         controller = GetComponent<PlayerController>();
+
+        if (startMoney <= 0) return;
         GameObject coinObj = Instantiate(coinPrefab, null);
         Coin coin = coinObj.GetComponent<Coin>();
         coin.Amount = startMoney;
@@ -36,18 +44,14 @@ public class Player : MonoBehaviour
     {
         if (isMining)
         {
-            AddRocksToInventoryAfterTime();
+            AddRocksToPlayerAfterTime();
         }
-    }
-
-    private void AddRocksToInventoryAfterTime()
-    {
-        // TODO, ROCK ITEM, rock is only sellable, do interface, in script when sell check if item is ISellable
     }
 
     public void StartMiningRock(RockMine targetRockMine)
     {
         isMining = true;
+        pickaxeVisual.SetActive(true);
         controller.InputsActive = false;
         controller.MovementActive = false;
         Transform target = targetRockMine.transform;
@@ -55,9 +59,21 @@ public class Player : MonoBehaviour
         targetPosition.y = transform.position.y; // Keep the current object's Y position
         transform.LookAt(targetPosition); // Rotate the object to face the target
     }
+
+    private void AddRocksToPlayerAfterTime()
+    {
+        timer += Time.deltaTime;
+        if (timer > rockGatherInterval)
+        {
+            timer = 0;
+            Item rock = Instantiate(rockPrefab).GetComponent<Item>();
+            Inventory.AddItem(rock);
+        }
+    }
     public void StopMiningRock()
     {
         isMining = false;
+        pickaxeVisual.SetActive(false);
         controller.InputsActive = true;
         controller.MovementActive = true;
     }
