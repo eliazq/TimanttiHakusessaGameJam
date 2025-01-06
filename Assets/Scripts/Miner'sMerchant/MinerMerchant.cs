@@ -14,7 +14,8 @@ public class MinerMerchant : MonoBehaviour, IInteractable
     [SerializeField] GameObject soldOutText;
 
     public bool isDiamondHolder = false;
-
+    
+    public List<Gem> Gems = new List<Gem>();
     [SerializeField] List<WeightedGameObject> gems;
 
     int maxRocks = 4;
@@ -35,6 +36,10 @@ public class MinerMerchant : MonoBehaviour, IInteractable
             });
         }
         rockPriceText.text = $"= {rockCost}$";
+        foreach( WeightedGameObject gem in gems)
+        {
+            Gems.Add(gem.gameObject.GetComponent<Gem>());
+        }
     }
 
     private void Start()
@@ -52,7 +57,8 @@ public class MinerMerchant : MonoBehaviour, IInteractable
         }
         
         if (rocks <= 0) soldOutText.SetActive(true);
-
+        
+        
     }
 
     private void SellRock()

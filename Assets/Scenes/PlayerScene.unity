@@ -2145,8 +2145,68 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1393935793147489840, guid: c628a30c88afadb41aa3ba73b7aed83d, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5112099399948080606, guid: c628a30c88afadb41aa3ba73b7aed83d, type: 3}
+      propertyPath: gems.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5112099399948080606, guid: c628a30c88afadb41aa3ba73b7aed83d, type: 3}
+      propertyPath: gems.Array.data[0].weight
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5112099399948080606, guid: c628a30c88afadb41aa3ba73b7aed83d, type: 3}
+      propertyPath: gems.Array.data[1].weight
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 5112099399948080606, guid: c628a30c88afadb41aa3ba73b7aed83d, type: 3}
+      propertyPath: gems.Array.data[2].weight
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5112099399948080606, guid: c628a30c88afadb41aa3ba73b7aed83d, type: 3}
+      propertyPath: gems.Array.data[3].weight
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 5112099399948080606, guid: c628a30c88afadb41aa3ba73b7aed83d, type: 3}
+      propertyPath: gems.Array.data[4].weight
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5112099399948080606, guid: c628a30c88afadb41aa3ba73b7aed83d, type: 3}
+      propertyPath: gems.Array.data[5].weight
+      value: 25
+      objectReference: {fileID: 0}
+    - target: {fileID: 5112099399948080606, guid: c628a30c88afadb41aa3ba73b7aed83d, type: 3}
+      propertyPath: gems.Array.data[6].weight
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 5112099399948080606, guid: c628a30c88afadb41aa3ba73b7aed83d, type: 3}
+      propertyPath: gems.Array.data[0].gameObject
+      value: 
+      objectReference: {fileID: 5615900312146959283, guid: b0619a466d16df4439a7a7de729aace2, type: 3}
+    - target: {fileID: 5112099399948080606, guid: c628a30c88afadb41aa3ba73b7aed83d, type: 3}
+      propertyPath: gems.Array.data[1].gameObject
+      value: 
+      objectReference: {fileID: 6321618166478913068, guid: 6bfe9746203021d4b9a4cd251859c6c4, type: 3}
+    - target: {fileID: 5112099399948080606, guid: c628a30c88afadb41aa3ba73b7aed83d, type: 3}
+      propertyPath: gems.Array.data[2].gameObject
+      value: 
+      objectReference: {fileID: 386559853732292515, guid: fbbfa2788dd17444eab010ca6abf8332, type: 3}
+    - target: {fileID: 5112099399948080606, guid: c628a30c88afadb41aa3ba73b7aed83d, type: 3}
+      propertyPath: gems.Array.data[3].gameObject
+      value: 
+      objectReference: {fileID: 4037751729924012276, guid: a6a7bb870aafbcc4e9c38846c2a37641, type: 3}
+    - target: {fileID: 5112099399948080606, guid: c628a30c88afadb41aa3ba73b7aed83d, type: 3}
+      propertyPath: gems.Array.data[4].gameObject
+      value: 
+      objectReference: {fileID: 1584360263438425695, guid: b81dc457506b1864295cf56433cc7d8d, type: 3}
+    - target: {fileID: 5112099399948080606, guid: c628a30c88afadb41aa3ba73b7aed83d, type: 3}
+      propertyPath: gems.Array.data[5].gameObject
+      value: 
+      objectReference: {fileID: 7531143277193690296, guid: 5a6e60bdea7a4624a865f646d065a130, type: 3}
+    - target: {fileID: 5112099399948080606, guid: c628a30c88afadb41aa3ba73b7aed83d, type: 3}
+      propertyPath: gems.Array.data[6].gameObject
+      value: 
+      objectReference: {fileID: 5507436938910263606, guid: 78e08ca1746e4b7408ab047c9253fd4d, type: 3}
     - target: {fileID: 6074959922942901114, guid: c628a30c88afadb41aa3ba73b7aed83d, type: 3}
       propertyPath: m_Name
       value: MinerMerchant
