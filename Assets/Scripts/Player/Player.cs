@@ -16,9 +16,6 @@ public class Player : MonoBehaviour
 
     public bool IsMining { get { return isMining; } }
 
-    float timer = 0;
-    [SerializeField] float rockGatherInterval = 2;
-
     bool isMining;
 
     private void Awake()
@@ -34,38 +31,33 @@ public class Player : MonoBehaviour
         Inventory.AddItem(ItemManager.CreateItem("Coin", startMoney));
     }
 
-    private void Update()
-    {
-        if (isMining)
-        {
-            AddRocksToPlayerAfterTime();
-        }
-    }
-
     public void StartMiningRock(RockMine targetRockMine)
     {
         isMining = true;
-        Controller.InputsActive = false;
-        Controller.MovementActive = false;
-        Transform target = targetRockMine.transform;
-        Vector3 targetPosition = target.position;
+        DisableMovement();
+        LookTowards(targetRockMine.transform.position);
+    }
+
+    private void LookTowards(Vector3 targetPosition)
+    {
         targetPosition.y = transform.position.y; // Keep the current object's Y position
         transform.LookAt(targetPosition); // Rotate the object to face the target
     }
 
-    private void AddRocksToPlayerAfterTime()
-    {
-        timer += Time.deltaTime;
-        if (timer > rockGatherInterval)
-        {
-            timer = 0;
-            Inventory.AddItem(ItemManager.CreateItem("Rock"));
-        }
-    }
     public void StopMiningRock()
     {
         isMining = false;
+        EnableMovement();
+    }
+
+    private void EnableMovement()
+    {
         Controller.InputsActive = true;
-        Controller.MovementActive = true;
+        Controller.MovementActive = true;       
+    }
+    private void DisableMovement()
+    {
+        Controller.InputsActive = false;
+        Controller.MovementActive = false;       
     }
 }

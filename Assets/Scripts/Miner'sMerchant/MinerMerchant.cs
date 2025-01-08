@@ -61,12 +61,11 @@ public class MinerMerchant : MonoBehaviour, IInteractable
     }
     private bool TrySellRock()
     {
-        Player.Instance.Inventory.TryGetItem("Coin", out Item coin);
-
-        if (coin != null && coin.Amount >= rockCost) coin.Amount -= rockCost;
+        if (Player.Instance.Inventory.TryGetItem("Coin", out Item coin) && coin.Amount >= rockCost)
+        {
+            coin.Amount -= rockCost;
+        }
         else return false;
-
-        if (coin.Amount <= 0) Player.Instance.Inventory.DestroyItem(coin);
 
         // GIVE DIAMOND IF HOLDER
         if (rocks <= 1 && isDiamondHolder && !Player.Instance.Inventory.HasItem("Cullinan Diamond"))
@@ -101,14 +100,7 @@ public class MinerMerchant : MonoBehaviour, IInteractable
     {
         if (Player.Instance.Inventory.TryGetItem("Rock", out Item rock))
         {
-            if (Player.Instance.Inventory.TryGetItem("Coin", out Item coin))
-            {
-                coin.Amount += rock.GetComponent<Rock>().Price;
-            }
-            else
-            {
-                Player.Instance.Inventory.AddItem(ItemManager.CreateItem("Coin", rock.GetComponent<Rock>().Price));
-            }
+            Player.Instance.Inventory.AddItem(ItemManager.CreateItem("Coin", rock.GetComponent<Rock>().Price));
             Player.Instance.Inventory.DestroyItem(rock);
         }
     }
