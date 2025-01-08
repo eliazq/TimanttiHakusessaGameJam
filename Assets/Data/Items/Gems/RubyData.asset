@@ -15,3 +15,4 @@ MonoBehaviour:
   itemIcon: {fileID: 21300000, guid: f2638538cbf5f9443841230150501da4, type: 3}
   stackable: 1
   itemName: Ruby
+  itemPrefab: {fileID: 386559853732292515, guid: fbbfa2788dd17444eab010ca6abf8332, type: 3}

@@ -10,9 +10,7 @@ public class MinerMerchant : MonoBehaviour, IInteractable
     [SerializeField] Transform rockButtonsContainer;
     [SerializeField] GameObject rockButton;
     [SerializeField] TextMeshProUGUI rockPriceText;
-    [SerializeField] GameObject diamondPrefab;
     [SerializeField] GameObject soldOutText;
-    [SerializeField] GameObject coinPrefab;
 
     public bool isDiamondHolder = false;
     
@@ -61,7 +59,6 @@ public class MinerMerchant : MonoBehaviour, IInteractable
         
         
     }
-
     private bool TrySellRock()
     {
         Player.Instance.Inventory.TryGetItem("Coin", out Item coin);
@@ -74,14 +71,14 @@ public class MinerMerchant : MonoBehaviour, IInteractable
         // GIVE DIAMOND IF HOLDER
         if (rocks <= 1 && isDiamondHolder && !Player.Instance.Inventory.HasItem("Cullinan Diamond"))
         {
-            Player.Instance.Inventory.AddItem(Instantiate(diamondPrefab, null).GetComponent<Item>());
+            Player.Instance.Inventory.AddItem(ItemManager.CreateItem("Cullinan Diamond"));
         }
         else if (isDiamondHolder && !Player.Instance.Inventory.HasItem("Cullinan Diamond"))
         {
             int rndTwo = Random.Range(0, 3); // 0, 1, 2
             if (rndTwo == 1)
             {
-                Player.Instance.Inventory.AddItem(Instantiate(diamondPrefab, null).GetComponent<Item>());
+                Player.Instance.Inventory.AddItem(ItemManager.CreateItem("Cullinan Diamond"));
             }
             else
             {
@@ -110,8 +107,7 @@ public class MinerMerchant : MonoBehaviour, IInteractable
             }
             else
             {
-                GameObject coinObj = Instantiate(coinPrefab);
-                coinObj.GetComponent<Coin>().Amount = rock.GetComponent<Rock>().Price;
+                Player.Instance.Inventory.AddItem(ItemManager.CreateItem("Coin", rock.GetComponent<Rock>().Price));
             }
             Player.Instance.Inventory.DestroyItem(rock);
         }
@@ -133,13 +129,13 @@ public class MinerMerchant : MonoBehaviour, IInteractable
     {
         if (minerSellingUI.activeSelf)
         {
-            Player.Instance.controller.InputsActive = true;
-            Player.Instance.controller.MovementActive = true;
+            Player.Instance.Controller.InputsActive = true;
+            Player.Instance.Controller.MovementActive = true;
         }
         else
         {
-            Player.Instance.controller.InputsActive = false;
-            Player.Instance.controller.MovementActive = false;
+            Player.Instance.Controller.InputsActive = false;
+            Player.Instance.Controller.MovementActive = false;
         }
         TriggerSellerUI();
     }

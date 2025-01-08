@@ -15,3 +15,4 @@ MonoBehaviour:
   itemIcon: {fileID: 21300000, guid: 7c1c3774acade9447b9748ce5f92abab, type: 3}
   stackable: 0
   itemName: Cullinan Diamond
+  itemPrefab: {fileID: 5615900312146959283, guid: b0619a466d16df4439a7a7de729aace2, type: 3}

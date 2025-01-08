@@ -15,3 +15,4 @@ MonoBehaviour:
   itemIcon: {fileID: 21300000, guid: 6160981a692935748a61950c01cc3492, type: 3}
   stackable: 1
   itemName: Rock
+  itemPrefab: {fileID: 3495234893854685191, guid: f3f73e4a3929fb04cbadd3bddce08363, type: 3}

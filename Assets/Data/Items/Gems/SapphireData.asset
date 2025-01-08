@@ -15,3 +15,4 @@ MonoBehaviour:
   itemIcon: {fileID: 21300000, guid: 2831dbf3f4b7e454389d050d99575162, type: 3}
   stackable: 1
   itemName: Sapphire
+  itemPrefab: {fileID: 4037751729924012276, guid: a6a7bb870aafbcc4e9c38846c2a37641, type: 3}

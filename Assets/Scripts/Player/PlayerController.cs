@@ -4,11 +4,13 @@ using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
+
+    [Header("References")]
     [SerializeField] Camera mainCamera;
     [SerializeField] NavMeshAgent navAgent;
+    [SerializeField] private GameObject flagVisual;
     [SerializeField] private float clickMaxDistance = 100f;
     [SerializeField] private LayerMask movableLayer;
-    [SerializeField] private GameObject flagVisual;
     [SerializeField] private float walkingSpeed = 1.5f;
     [SerializeField] private float runningSpeed = 2.5f;
 
@@ -17,14 +19,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float staminaDrainRate = 1.5f; // Stamina drain rate per second
     [SerializeField] private float staminaRegenRate = 1f; // Stamina regen rate per interval
     [SerializeField] private float regenInterval = 4f; // Interval for stamina regeneration
-    
+
+    [Header("Properties")]
     public float Stamina { get { return currentStamina; } private set { currentStamina = value; } }
     private float currentStamina;
     private float regenTimer;
 
     public bool InputsActive { get; set; } = true;
     public bool MovementActive { get; set; } = true;
-
     public bool IsWalking { get; private set; } = true;
     public bool IsRunning { get; private set; }
     public bool IsMoving { get { return !IsWalking && !IsRunning; } }

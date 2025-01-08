@@ -15,3 +15,4 @@ MonoBehaviour:
   itemIcon: {fileID: 21300000, guid: 11583232bce36b84fa68efcdca6b1a6f, type: 3}
   stackable: 1
   itemName: Gold
+  itemPrefab: {fileID: 1584360263438425695, guid: b81dc457506b1864295cf56433cc7d8d, type: 3}
