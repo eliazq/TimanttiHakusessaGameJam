@@ -8,6 +8,5 @@ public class GameManager : MonoBehaviour
     private void Awake()
     {
         MinerMerchant diamondMiner = miners[Random.Range(0, miners.Length)];
-        diamondMiner.isDiamondHolder = true;
     }
 }

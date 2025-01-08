@@ -90,13 +90,11 @@ public class MinerMerchant : MonoBehaviour, IInteractable
     {
         if (minerSellingUI.activeSelf)
         {
-            Player.Instance.Controller.InputsActive = true;
-            Player.Instance.Controller.MovementActive = true;
+            Player.Instance.Controller.EnableMovement();
         }
         else
         {
-            Player.Instance.Controller.InputsActive = false;
-            Player.Instance.Controller.MovementActive = false;
+            Player.Instance.Controller.DisableMovement();
         }
         TriggerSellerUI();
     }

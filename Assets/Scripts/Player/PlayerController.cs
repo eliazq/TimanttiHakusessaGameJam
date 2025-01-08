@@ -49,14 +49,6 @@ public class PlayerController : MonoBehaviour
 
     private void HandleMovementSpeed()
     {
-        if (!MovementActive)
-        {
-            navAgent.speed = walkingSpeed;
-            IsWalking = false;
-            IsRunning = false;
-            navAgent.destination = transform.position;
-            return;
-        }
         if (Stamina <= 0)
         {
             navAgent.speed = walkingSpeed;
@@ -91,7 +83,7 @@ public class PlayerController : MonoBehaviour
     private void MoveToMousePosition()
     {
         Vector3 mouseClickInWorld = GetMouseClickPointInWorld();
-        if (mouseClickInWorld != transform.position)
+        if (mouseClickInWorld != transform.position && MovementActive)
         {
             navAgent.destination = mouseClickInWorld;
         }
@@ -144,6 +136,16 @@ public class PlayerController : MonoBehaviour
 
         // Clamp stamina between 0 and maxStamina
         Stamina = Mathf.Clamp(Stamina, 0, maxStamina);
+    }
+
+    public void EnableMovement()
+    {
+        MovementActive = true;
+    }
+    public void DisableMovement()
+    {
+        MovementActive = false;
+        navAgent.destination = transform.position;
     }
 
 }
