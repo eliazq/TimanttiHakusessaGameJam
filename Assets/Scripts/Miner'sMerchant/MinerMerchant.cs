@@ -100,7 +100,8 @@ public class MinerMerchant : MonoBehaviour, IInteractable
     {
         if (Player.Instance.Inventory.TryGetItem("Rock", out Item rock))
         {
-            Player.Instance.Inventory.AddItem(ItemManager.CreateItem("Coin", rock.GetComponent<Rock>().Price));
+            Item coin = ItemManager.CreateItem("Coin", rock.GetComponent<Rock>().Price);
+            Player.Instance.Inventory.AddItem(coin);
             Player.Instance.Inventory.DestroyItem(rock);
         }
     }

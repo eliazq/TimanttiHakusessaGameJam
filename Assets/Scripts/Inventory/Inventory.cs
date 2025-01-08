@@ -38,7 +38,7 @@ public class Inventory : MonoBehaviour
         {
             if (i.Data.itemName == item.Data.itemName)
             {
-                i.Amount++;
+                i.Amount += item.Amount;
                 Destroy(item.gameObject);
                 OnInventoryChanged?.Invoke(this, EventArgs.Empty);
                 return true;
