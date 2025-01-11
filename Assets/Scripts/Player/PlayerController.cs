@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("DEBUG")]
     [SerializeField] Vector3 agentDestination;
+    [SerializeField] bool agentIsStopped;
 
     // Events
     public event EventHandler<MovementClickEventArgs> OnMovementClick;
@@ -39,7 +40,7 @@ public class PlayerController : MonoBehaviour
     private float regenTimer;
 
     public bool InputsActive { get; set; } = true;
-    public bool MovementActive { get; set; } = true;
+    public bool MovementActive { get; private set; } = true;
     private float MovementSpeed
     {
         get
@@ -98,6 +99,7 @@ public class PlayerController : MonoBehaviour
     private void DebugUpdate()
     {
         agentDestination = navAgent.destination;
+        agentIsStopped = navAgent.isStopped;
     }
 
     private void HandleMovementSpeed()
@@ -119,6 +121,12 @@ public class PlayerController : MonoBehaviour
             OnDestinationReached?.Invoke(this, EventArgs.Empty);
             IsWalking = false;
             navAgent.isStopped = true;
+        }
+        else if(navAgent.isStopped)
+        {
+            navAgent.isStopped = false;
+            if (!isRunning)
+                movementSpeed = walkingSpeed;
         }
     }
 
