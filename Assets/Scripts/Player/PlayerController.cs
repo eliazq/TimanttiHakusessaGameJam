@@ -1,4 +1,5 @@
 using System;
+using Unity.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
@@ -14,6 +15,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float clickMaxDistance = 100f;
     [SerializeField] private float walkingSpeed = 1.5f;
     [SerializeField] private float runningSpeed = 2.5f;
+
+    [Header("DEBUG")]
+    [SerializeField] Vector3 agentDestination;
 
     // Events
     public event EventHandler<MovementClickEventArgs> OnMovementClick;
@@ -46,7 +50,8 @@ public class PlayerController : MonoBehaviour
         {
             movementSpeed = value;
             if (movementSpeed > walkingSpeed) IsRunning = true;
-            else IsWalking = true;
+            else if (!navAgent.isStopped) isWalking = true;
+            else isWalking = false;
             navAgent.speed = movementSpeed;
         }
     }
@@ -87,6 +92,12 @@ public class PlayerController : MonoBehaviour
         HandleMovementInput();
         HandleStamina();
         HandleMovementSpeed();
+        DebugUpdate();
+    }
+
+    private void DebugUpdate()
+    {
+        agentDestination = navAgent.destination;
     }
 
     private void HandleMovementSpeed()
@@ -107,6 +118,7 @@ public class PlayerController : MonoBehaviour
         {
             OnDestinationReached?.Invoke(this, EventArgs.Empty);
             IsWalking = false;
+            navAgent.isStopped = true;
         }
     }
 
