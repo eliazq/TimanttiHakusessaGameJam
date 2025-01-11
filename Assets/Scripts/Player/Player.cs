@@ -32,7 +32,7 @@ public class Player : MonoBehaviour
     public void StartMiningRock(RockMine targetRockMine)
     {
         isMining = true;
-        DisableMovement();
+        Controller.DisableMovement();
         LookTowards(targetRockMine.transform.position);
     }
 
@@ -45,17 +45,7 @@ public class Player : MonoBehaviour
     public void StopMiningRock()
     {
         isMining = false;
-        EnableMovement();
+        Controller.EnableMovement();
     }
 
-    private void EnableMovement()
-    {
-        Controller.InputsActive = true;
-        Controller.MovementActive = true;       
-    }
-    private void DisableMovement()
-    {
-        Controller.InputsActive = false;
-        Controller.MovementActive = false;       
-    }
 }
