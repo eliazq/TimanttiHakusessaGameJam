@@ -168,4 +168,14 @@ public class PlayerController : MonoBehaviour
         Stamina = Mathf.Clamp(Stamina, 0, maxStamina);
     }
 
+    public void EnableMovement()
+    {
+        MovementActive = true;
+    }
+    public void DisableMovement()
+    {
+        MovementActive = false;
+        navAgent.destination = transform.position;
+    }
+
 }
