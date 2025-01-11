@@ -4254,14 +4254,6 @@ PrefabInstance:
       propertyPath: itemSlotParent
       value: 
       objectReference: {fileID: 1418064386}
-    - target: {fileID: 2157605579757030337, guid: 18d642a364e15994faacb6a26306b300, type: 3}
-      propertyPath: rockPrefab
-      value: 
-      objectReference: {fileID: 3495234893854685191, guid: f3f73e4a3929fb04cbadd3bddce08363, type: 3}
-    - target: {fileID: 2157605579757030337, guid: 18d642a364e15994faacb6a26306b300, type: 3}
-      propertyPath: startMoney
-      value: 100
-      objectReference: {fileID: 0}
     - target: {fileID: 2973465192367153879, guid: 18d642a364e15994faacb6a26306b300, type: 3}
       propertyPath: m_Name
       value: Player

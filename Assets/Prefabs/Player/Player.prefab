@@ -75,6 +75,7 @@ GameObject:
   - component: {fileID: 5353286265608888818}
   - component: {fileID: 8478229246924925539}
   - component: {fileID: 294767201043439540}
+  - component: {fileID: 5891111558152158877}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -140,7 +141,6 @@ MonoBehaviour:
   movableLayer:
     serializedVersion: 2
     m_Bits: 1
-  flagVisual: {fileID: 4914375707539917377, guid: 8481da5debdee2b48bde906e63db4146, type: 3}
   walkingSpeed: 2.5
   runningSpeed: 3.4
   maxStamina: 100
@@ -173,11 +173,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3628ccf54ad8ed49937ebb86dff51e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  coinPrefab: {fileID: 8521836697080973922, guid: a6248cdf5befec840909182fba2e7e76, type: 3}
-  startMoney: 2400
   inventory: {fileID: 3304580300550255626}
-  pickaxeVisual: {fileID: 4115634011477811433}
-  controller: {fileID: 5290072502825268533}
+  startMoney: 100
 --- !u!114 &5353286265608888818
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,6 +216,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   staminaText: {fileID: 0}
+--- !u!114 &5891111558152158877
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2973465192367153879}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a48d2245b8e49d34f8c691bab23a5a4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  clickWorldVisualPrefab: {fileID: 4914375707539917377, guid: 8481da5debdee2b48bde906e63db4146, type: 3}
 --- !u!1 &3295733959469666045
 GameObject:
   m_ObjectHideFlags: 0
@@ -409,10 +419,5 @@ PrefabInstance:
 --- !u!4 &1821807270889993618 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5879282086685019787, guid: 44f9cc5f5fc95af48a7c38743590e616, type: 3}
-  m_PrefabInstance: {fileID: 5250981554023480089}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &4115634011477811433 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 8197273378396314608, guid: 44f9cc5f5fc95af48a7c38743590e616, type: 3}
   m_PrefabInstance: {fileID: 5250981554023480089}
   m_PrefabAsset: {fileID: 0}

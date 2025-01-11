@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.EventSystems;
@@ -6,13 +7,21 @@ public class PlayerController : MonoBehaviour
 {
 
     [Header("References")]
+    [Space(10)]
     [SerializeField] Camera mainCamera;
     [SerializeField] NavMeshAgent navAgent;
-    [SerializeField] private GameObject flagVisual;
-    [SerializeField] private float clickMaxDistance = 100f;
     [SerializeField] private LayerMask movableLayer;
+    [SerializeField] private float clickMaxDistance = 100f;
     [SerializeField] private float walkingSpeed = 1.5f;
     [SerializeField] private float runningSpeed = 2.5f;
+
+    // Events
+    public event EventHandler<MovementClickEventArgs> OnMovementClick;
+    public class MovementClickEventArgs : EventArgs
+    {
+        public Vector3 clickPosition;
+    }
+    public event EventHandler OnDestinationReached;
 
     [Header("Stamina")]
     [SerializeField] private float maxStamina = 100f; // Maximum stamina
@@ -27,15 +36,48 @@ public class PlayerController : MonoBehaviour
 
     public bool InputsActive { get; set; } = true;
     public bool MovementActive { get; set; } = true;
-    public bool IsWalking { get; private set; } = true;
-    public bool IsRunning { get; private set; }
+    private float MovementSpeed
+    {
+        get
+        {
+            return movementSpeed;
+        }
+        set
+        {
+            movementSpeed = value;
+            if (movementSpeed > walkingSpeed) IsRunning = true;
+            else IsWalking = true;
+            navAgent.speed = movementSpeed;
+        }
+    }
+    public bool IsWalking 
+    { 
+        get { return isWalking; }
+        private set 
+        {
+            isWalking = value;
+            if (isWalking) isRunning = false;
+        } 
+    }
+    public bool IsRunning
+    {
+        get { return isRunning; }
+        set
+        {
+            isRunning = value;
+            if (isRunning) isWalking = false;
+        }
+    }
     public bool IsMoving { get { return !IsWalking && !IsRunning; } }
 
-    GameObject lastFlag;
+    [Header("Variables")]
+    private float movementSpeed;
+    private bool isWalking;
+    private bool isRunning;
 
     private void Start()
     {
-        navAgent.speed = walkingSpeed;
+        MovementSpeed = walkingSpeed;
         Stamina = maxStamina; // Initialize stamina
         regenTimer = 0f; // Initialize regeneration timer
     }
@@ -51,31 +93,20 @@ public class PlayerController : MonoBehaviour
     {
         if (!MovementActive)
         {
-            navAgent.speed = walkingSpeed;
-            IsWalking = false;
-            IsRunning = false;
+            MovementSpeed = walkingSpeed;
             navAgent.destination = transform.position;
             return;
         }
         if (Stamina <= 0)
         {
-            navAgent.speed = walkingSpeed;
-            IsRunning = false;
-            IsWalking = true;
+            MovementSpeed = walkingSpeed;
         }
+        // Check if reached destination
         float stoppingThreshold = 0.1f;
         if (Vector3.Distance(transform.position, navAgent.destination) < stoppingThreshold)
         {
+            OnDestinationReached?.Invoke(this, EventArgs.Empty);
             IsWalking = false;
-            IsRunning = false;
-            Destroy(lastFlag);
-        }
-        else
-        {
-            IsWalking = false;
-            IsRunning = false;
-            if (navAgent.speed == walkingSpeed) IsWalking = true;
-            else if (navAgent.speed == runningSpeed) IsRunning = true;
         }
     }
 
@@ -103,10 +134,7 @@ public class PlayerController : MonoBehaviour
 
         if (Physics.Raycast(ray, out RaycastHit hit, clickMaxDistance, movableLayer))
         {
-            if (lastFlag != null) Destroy(lastFlag);
-            lastFlag = Instantiate(flagVisual, hit.point, Quaternion.identity);
-            float randomAngle = Random.Range(0f, 360f);
-            lastFlag.transform.Rotate(Vector3.up, randomAngle);
+            OnMovementClick?.Invoke(this, new MovementClickEventArgs { clickPosition = hit.point });
             return hit.point;
         }
         return transform.position;
@@ -114,14 +142,8 @@ public class PlayerController : MonoBehaviour
 
     public void TriggerRunning()
     {
-        if (!IsRunning && Stamina > 0)
-        {
-            navAgent.speed = runningSpeed;
-        }
-        else
-        {
-            navAgent.speed = walkingSpeed;
-        }
+        if (!IsRunning && Stamina > 0) MovementSpeed = runningSpeed;
+        else MovementSpeed = walkingSpeed;
     }
 
     private void HandleStamina()

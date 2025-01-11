@@ -13,7 +13,6 @@ public class Player : MonoBehaviour
     [Header("Properties")]
     public PlayerController Controller { get; private set; }
     public Inventory Inventory { get { return inventory; } }
-
     public bool IsMining { get { return isMining; } }
 
     bool isMining;
@@ -22,12 +21,11 @@ public class Player : MonoBehaviour
     {
         if (Instance == null) Instance = this;
         else if (Instance != this) Destroy(gameObject);
+        Controller = GetComponent<PlayerController>();
     }
 
     private void Start()
     {
-        Controller = GetComponent<PlayerController>();
-
         Inventory.AddItem(ItemManager.CreateItem("Coin", startMoney));
     }
 
