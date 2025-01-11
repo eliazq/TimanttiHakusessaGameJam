@@ -78,6 +78,7 @@ public class PlayerController : MonoBehaviour
 
     [Header("Variables")]
     private float movementSpeed;
+    private bool isRunningTriggered = false;
     private bool isWalking;
     private bool isRunning;
 
@@ -112,21 +113,13 @@ public class PlayerController : MonoBehaviour
         }
         if (Stamina <= 0)
         {
-            MovementSpeed = walkingSpeed;
+            isRunningTriggered = false;
         }
         // Check if reached destination
         float stoppingThreshold = 0.1f;
         if (Vector3.Distance(transform.position, navAgent.destination) < stoppingThreshold)
         {
             OnDestinationReached?.Invoke(this, EventArgs.Empty);
-            IsWalking = false;
-            navAgent.isStopped = true;
-        }
-        else if(navAgent.isStopped)
-        {
-            navAgent.isStopped = false;
-            if (!isRunning)
-                movementSpeed = walkingSpeed;
         }
     }
 
@@ -162,8 +155,8 @@ public class PlayerController : MonoBehaviour
 
     public void TriggerRunning()
     {
-        if (!IsRunning && Stamina > 0) MovementSpeed = runningSpeed;
-        else MovementSpeed = walkingSpeed;
+        isRunningTriggered = !isRunningTriggered;
+        if (Stamina <= 0) isRunningTriggered = false;
     }
 
     private void HandleStamina()
