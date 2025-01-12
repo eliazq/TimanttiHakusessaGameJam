@@ -18,7 +18,7 @@ public class MinerMerchant : MonoBehaviour, IInteractable
     }
     public event EventHandler OnInteract;
 
-    public List<Gem> Gems = new List<Gem>();
+    public List<Gem> Gems { get; private set; } = new List<Gem>();
     [SerializeField] List<WeightedGameObject> gems;
 
     int maxRocks = 4;
