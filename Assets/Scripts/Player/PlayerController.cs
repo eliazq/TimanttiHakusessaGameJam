@@ -19,6 +19,9 @@ public class PlayerController : MonoBehaviour
     [Header("DEBUG")]
     [SerializeField] Vector3 agentDestination;
     [SerializeField] bool agentIsStopped;
+    [SerializeField] bool moving;
+    [SerializeField] bool walking;
+    [SerializeField] bool running;
 
     // Events
     public event EventHandler<MovementClickEventArgs> OnMovementClick;
@@ -50,15 +53,22 @@ public class PlayerController : MonoBehaviour
         set
         {
             movementSpeed = value;
-            if (movementSpeed > walkingSpeed) IsRunning = true;
-            else if (!navAgent.isStopped) isWalking = true;
-            else isWalking = false;
+            if (IsMoving)
+            {
+                if (movementSpeed > walkingSpeed) IsRunning = true;
+                else IsWalking = true;
+            }
+            else
+            {
+                IsWalking = false;
+                IsRunning = false;
+            }
             navAgent.speed = movementSpeed;
         }
     }
     public bool IsWalking 
     { 
-        get { return isWalking; }
+        get { return isWalking && IsMoving; }
         private set 
         {
             isWalking = value;
@@ -67,14 +77,14 @@ public class PlayerController : MonoBehaviour
     }
     public bool IsRunning
     {
-        get { return isRunning; }
+        get { return isRunning && IsMoving; }
         set
         {
             isRunning = value;
             if (isRunning) isWalking = false;
         }
     }
-    public bool IsMoving { get { return !IsWalking && !IsRunning; } }
+    public bool IsMoving { get { return navAgent.velocity.magnitude > 0.1f; } }
 
     [Header("Variables")]
     private float movementSpeed;
@@ -101,13 +111,15 @@ public class PlayerController : MonoBehaviour
     {
         agentDestination = navAgent.destination;
         agentIsStopped = navAgent.isStopped;
+        moving = IsMoving;
+        walking = IsWalking;
+        running = IsRunning;
     }
 
     private void HandleMovementSpeed()
     {
         if (!MovementActive)
         {
-            MovementSpeed = walkingSpeed;
             navAgent.destination = transform.position;
             return;
         }
@@ -115,11 +127,16 @@ public class PlayerController : MonoBehaviour
         {
             isRunningTriggered = false;
         }
+
+        if (isRunningTriggered) MovementSpeed = runningSpeed;
+        else MovementSpeed = walkingSpeed;
+
         // Check if reached destination
         float stoppingThreshold = 0.1f;
         if (Vector3.Distance(transform.position, navAgent.destination) < stoppingThreshold)
         {
             OnDestinationReached?.Invoke(this, EventArgs.Empty);
+            IsWalking = false;
         }
     }
 
