@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -6,21 +7,27 @@ using UnityEngine.UI;
 public class MinerMerchant : MonoBehaviour, IInteractable
 {
     [SerializeField] int rockCost = 750;
-    [SerializeField] GameObject minerSellingUI;
     [SerializeField] Transform rockButtonsContainer;
     [SerializeField] GameObject rockButton;
-    [SerializeField] TextMeshProUGUI rockPriceText;
-    [SerializeField] GameObject soldOutText;
+
+    // Events
+    public event EventHandler<RockSoldEventArgs> OnRockSold;
+    public class RockSoldEventArgs : EventArgs
+    {
+        public bool allRocksSold;
+    }
+    public event EventHandler OnInteract;
 
     public List<Gem> Gems = new List<Gem>();
     [SerializeField] List<WeightedGameObject> gems;
 
     int maxRocks = 4;
     int rocks;
+    bool isInteracting;
 
     private void Awake()
     {
-        rocks = Random.Range(1, maxRocks + 1);
+        rocks = UnityEngine.Random.Range(1, maxRocks + 1);
         
         foreach(WeightedGameObject gem in gems)
             Gems.Add(gem.gameObject.GetComponent<Gem>());
@@ -59,8 +66,8 @@ public class MinerMerchant : MonoBehaviour, IInteractable
         Player.Instance.Inventory.AddItem(randomGem.GetComponent<Item>());
 
         rocks--;
-        if (rocks <= 0) soldOutText.SetActive(true);
-
+        
+        OnRockSold?.Invoke(this, new RockSoldEventArgs { allRocksSold = rocks <= 0 });
         return true; // Rock Sold!
     }
 
@@ -74,13 +81,6 @@ public class MinerMerchant : MonoBehaviour, IInteractable
         }
     }
 
-    public string GetInteractText()
-    {
-        if (minerSellingUI.activeSelf)
-            return "Close Seller's Menu";
-        else return "Open Seller's Menu";
-    }
-
     public Transform GetTransform()
     {
         return transform;
@@ -88,19 +88,15 @@ public class MinerMerchant : MonoBehaviour, IInteractable
 
     public void Interact(Transform interactorTransform)
     {
-        if (minerSellingUI.activeSelf)
-        {
-            Player.Instance.Controller.EnableMovement();
-        }
-        else
-        {
-            Player.Instance.Controller.DisableMovement();
-        }
-        TriggerSellerUI();
+        if (Player.Instance.Controller.MovementActive) { Player.Instance.Controller.DisableMovement(); isInteracting = true; }
+        else { Player.Instance.Controller.EnableMovement(); isInteracting = false; }
+
+        OnInteract?.Invoke(this, EventArgs.Empty);
     }
 
-    private void TriggerSellerUI()
+    public string GetInteractText()
     {
-        minerSellingUI.SetActive(!minerSellingUI.activeSelf);
+        if (!isInteracting) return "Open Merchant's Menu";
+        else return "Close Merchant's Menu";
     }
 }

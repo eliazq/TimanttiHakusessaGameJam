@@ -715,8 +715,8 @@ GameObject:
   m_Component:
   - component: {fileID: 660585765203427367}
   - component: {fileID: 5112099399948080606}
-  - component: {fileID: 7596319735942699519}
   - component: {fileID: 1386361696950094125}
+  - component: {fileID: 7596319735942699519}
   m_Layer: 0
   m_Name: MinerMerchant
   m_TagString: Untagged
@@ -754,14 +754,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rockCost: 750
-  minerSellingUI: {fileID: 1393935793147489840}
   rockButtonsContainer: {fileID: 6787666693808055766}
   rockButton: {fileID: 2904343848713565583, guid: d4e2605692835e54e88e94165f9abeee, type: 3}
-  rockPriceText: {fileID: 3720016870242592706}
-  diamondPrefab: {fileID: 5615900312146959283, guid: b0619a466d16df4439a7a7de729aace2, type: 3}
-  soldOutText: {fileID: 4113230867697201167}
-  coinPrefab: {fileID: 0}
-  isDiamondHolder: 0
   Gems: []
   gems:
   - gameObject: {fileID: 6321618166478913068, guid: 6bfe9746203021d4b9a4cd251859c6c4, type: 3}
@@ -776,6 +770,23 @@ MonoBehaviour:
     weight: 25
   - gameObject: {fileID: 5507436938910263606, guid: 78e08ca1746e4b7408ab047c9253fd4d, type: 3}
     weight: 50
+--- !u!114 &1386361696950094125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6074959922942901114}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6ac8314fa264aa48adc00cfc54e5d85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  minerMerchant: {fileID: 5112099399948080606}
+  merchantUI: {fileID: 1393935793147489840}
+  allRocksSoldText: {fileID: 4113230867697201167}
+  spritePricesParent: {fileID: 4176952632591216654}
+  spritePriceContainer: {fileID: 6520680574044137002, guid: f0fa2ad1421e18c40985166f9ce6140d, type: 3}
 --- !u!136 &7596319735942699519
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -799,21 +810,6 @@ CapsuleCollider:
   m_Height: 1.8
   m_Direction: 1
   m_Center: {x: 0, y: 0.9, z: 0}
---- !u!114 &1386361696950094125
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6074959922942901114}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6ac8314fa264aa48adc00cfc54e5d85, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  minerMerchant: {fileID: 5112099399948080606}
-  spritePricesParent: {fileID: 4176952632591216654}
-  spritePriceContainer: {fileID: 6520680574044137002, guid: f0fa2ad1421e18c40985166f9ce6140d, type: 3}
 --- !u!1 &7147073299761510846
 GameObject:
   m_ObjectHideFlags: 0

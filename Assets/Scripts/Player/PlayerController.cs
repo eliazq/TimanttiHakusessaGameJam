@@ -44,6 +44,8 @@ public class PlayerController : MonoBehaviour
 
     public bool InputsActive { get; set; } = true;
     public bool MovementActive { get; private set; } = true;
+
+    // MovementSpeed Sets IsWalking and IsRunning
     private float MovementSpeed
     {
         get
@@ -120,7 +122,7 @@ public class PlayerController : MonoBehaviour
     {
         if (!MovementActive)
         {
-            navAgent.destination = transform.position;
+            ResetMovementDestination();
             return;
         }
         if (Stamina <= 0)
@@ -205,6 +207,11 @@ public class PlayerController : MonoBehaviour
     public void DisableMovement()
     {
         MovementActive = false;
+        ResetMovementDestination();
+    }
+
+    private void ResetMovementDestination()
+    {
         navAgent.destination = transform.position;
     }
 
